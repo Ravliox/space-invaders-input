@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title> Registration title </title>
+        <link rel = "stylesheet" type="text/css" href="stylesheet.css">
+        <script src="script.js"></script>
+        <script src="./classes/Enemy.js"></script>
+        <script src="./classes/Game.js"></script>
+        <script src="./classes/Player.js"></script>
+        <script src="./classes/PowerUp.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class = "overlay" id="overlay">
+            <h1> Keyloggers, XSS attacks and SQL Injections attacks are on the rise!</h1>
+            <h1> Hackers can steal all your information, including names, address and credit card information!</h1>
+            <h1> Identity theft is no joke! Millions of people suffer each year! </h1>
+            <h1> Appoonia is dedicated to combating even the most ELITE hackers with its new and innovative registration process </h1> 
+            <button id="start-button">Start Registration</button>
+        </div>
+        <div class = "overlay" id="overlay-fuckup">
+            <h1> You have failed to correctly reintroduce your password 3 times and we now suspect you may be a bot. As such we have increased security for the registration process! </h1>
+            <button id="fuckup-button">What?</button>
+        </div>
+        <div class = "gameboard" id="gameboard">
+            <div class = "ship-container" id="player">
+                <img src="ship.png">
+            </div>
+            <div class = "player-attack" id="player-attack">
+            </div>
+            <div class = "message-container" id = "error-prompt"></div> 
+            <div class = "message-container" id ="prompt"></div>
+            <div class = "message-container" id = "composing-message"></div>
+            <div class = "powerup" id = "submit"> Submit </div>
+            <div class = "powerup" id = "backspace"> Backspace </div>
+            <div class = "powerup" id = "space"> Space </div>
+        </div>
+    </body>
+</html>

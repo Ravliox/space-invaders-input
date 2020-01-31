@@ -1,0 +1,105 @@
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f2f2f2;
+    position: relative;
+    background-image: url("background.jpg");
+    object-fit: cover;;
+}
+
+.ship-container {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 50px);
+}
+
+.ship-container > img {
+    height: 100%;
+    width: 100%;
+}
+
+.player-attack {
+    width: 1px;
+    height: 20px;
+    border: 1px solid red;
+    position: absolute;
+    left: calc(50% - 1px);
+    top: calc(100% - 120px);
+    background-color: red;
+}
+
+.character-container {
+    background-color: red;
+    position: absolute;
+    font-family: 'Orbitron', sans-serif;
+    box-sizing: border-box;
+    text-align: center;
+    padding-top: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    left: 0;
+}
+
+.message-container {
+    font-size: 64px;
+    font-family: 'Orbitron', sans-serif;
+    color: red;
+    position: relative;
+    top: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+.powerup {
+    background-color: red;
+    position: absolute;
+    font-family: 'Orbitron', sans-serif;
+    box-sizing: border-box;
+    border-radius: 20px;
+    width: 150px;
+    padding: 10px;
+    text-align: center;
+    top: -40px;
+}
+
+.overlay {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    z-index: 10;
+    text-align: center;
+}
+
+.overlay > h1 {
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Orbitron', sans-serif;
+    color: red;
+}
+
+.overlay > button {
+    height: 100px;
+    width: 250px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 30px;
+    background-color: #000;
+    border: 1px solid red;
+    color: red;
+    cursor: pointer;
+}
+
+#overlay-fuckup { 
+    display: none;
+}
+
+.gameboard {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
