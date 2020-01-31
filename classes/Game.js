@@ -1,6 +1,7 @@
 class Game {
     constructor(element, stringElement, player, playerAttack) {
         this.gameboard = element;
+        this.rightLimit = window.innerWidth;
         this.stringElement = stringElement;
         this.string = "";
         this.stage = 0;
@@ -24,6 +25,7 @@ class Game {
             confirmPassword: ""
         }
         this.fuckups = 0;
+        this.increasedSecurity = false;
 
         this.messages = [
             "Input your name!",
@@ -43,6 +45,21 @@ class Game {
 
     setGameState(state) {
         this.gameState = state;
+    }
+
+    dealWithResize() {
+        let rows;
+        if(this.stage == 0) {
+            rows = 3;
+        } else if(this.stage == 1) {
+            rows = 4;
+        } else {
+            rows = 7;
+        }
+        this.gameState.enemies.forEach(enemy => enemy.increaseSecurity());
+        this.positionEnemies(rows);
+        this.startEnemies();
+        this.increasedSecurity = true;
     }
     
     updateGameState() {
@@ -71,16 +88,16 @@ class Game {
             this.gameState.enemies.forEach(enemy => {
                 if(this.playerAttack.detectCollisionEnemy(enemy)) {
                     this.resetPlayerAttack();
-                    enemy.resetPosition();
+                    enemy.resetPosition(this.rightLimit);
                     this.addCharacter(enemy.character);
                 }
 
-                if(enemy.element.offsetLeft === window.innerWidth - 50) {
+                if(enemy.element.offsetLeft === this.rightLimit - 50) {
                     enemy.setDirection("left");
-                    enemy.moveToSide();
+                    enemy.moveToSide(this.rightLimit);
                 } else if (enemy.element.offsetLeft === 10) {
                     enemy.setDirection("right");
-                    enemy.moveToSide();
+                    enemy.moveToSide(this.rightLimit);
                 }
             })
         }, 0);
@@ -155,6 +172,7 @@ class Game {
                 this.fuckups = this.fuckups + 1;
                 if(this.fuckups > 2) {
                     document.getElementById("overlay-fuckup").style.display = "block";
+                    this.increasedSecurity = true;
                     this.gameState.enemies.forEach(enemy => enemy.increaseSecurity());
                     this.positionEnemies(7);
                     this.startEnemies();
@@ -274,7 +292,9 @@ class Game {
             characterElement.classList.add("character-container");
             characterElement.innerHTML = character;
             this.gameboard.append(characterElement);
-            this.gameState.enemies.push(new Enemy(character, characterElement));
+            let newEnemy = new Enemy(character, characterElement);
+            newEnemy.increasedSecurity = this.increasedSecurity;
+            this.gameState.enemies.push(newEnemy);
         }
     }
 
@@ -283,7 +303,7 @@ class Game {
             let topOffSet = 10 + 50 * Math.floor(Math.random() * rows);
             enemy.setTopOffset(topOffSet);
 
-            let leftOffset = Math.floor(Math.random() * window.innerWidth);
+            let leftOffset = Math.floor(Math.random() * this.rightLimit);
             enemy.setLeftOffset(leftOffset);
 
             let direction = Math.floor(Math.random() * 3) > 1 ? "left" : "right";
@@ -293,7 +313,7 @@ class Game {
 
     startEnemies() {
         this.gameState.enemies.forEach(enemy => {
-            enemy.moveToSide();
+            enemy.moveToSide(this.rightLimit);
         })
     }
 

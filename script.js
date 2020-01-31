@@ -1,7 +1,9 @@
+let game;
+
 window.onload = function() {
     let player = new Player(this.document.getElementById("player"));
     let playerAttack = new PlayerAttack(this.document.getElementById("player-attack"));
-    let game = new Game(this.document.getElementById("gameboard"), this.document.getElementById("composing-message"), player, playerAttack);
+    game = new Game(this.document.getElementById("gameboard"), this.document.getElementById("composing-message"), player, playerAttack);
 
     let overlay = this.document.getElementById("overlay");
     let fuckupOverlay = this.document.getElementById("overlay-fuckup");
@@ -47,4 +49,9 @@ window.onload = function() {
         game.updateGameState();
     }
     
+}
+
+window.onresize = function() {
+    game.rightLimit = window.innerWidth;
+    game.dealWithResize();
 }

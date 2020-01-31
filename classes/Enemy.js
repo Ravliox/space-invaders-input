@@ -6,15 +6,15 @@ class Enemy {
         this.currentDirection = "";
     }
 
-    moveToSide() {
+    moveToSide(rightLimit) {
         let speedCoefficient = this.increasedSecurity ? 1250 : 250;
-        let transitionDuration = this.currentDirection === "left" ? this.element.offsetLeft / speedCoefficient : (window.innerWidth - 50 - this.element.offsetLeft) / speedCoefficient;
+        let transitionDuration = this.currentDirection === "left" ? this.element.offsetLeft / speedCoefficient : (rightLimit - 50 - this.element.offsetLeft) / speedCoefficient;
 
         this.element.style.transition = `${transitionDuration}s left linear`;
         if(this.currentDirection === "left") {
             this.element.style.left = 10;
         } else if (this.currentDirection === "right") {
-            this.element.style.left = window.innerWidth - 50;
+            this.element.style.left = rightLimit - 50;
         }
 
         
@@ -36,7 +36,7 @@ class Enemy {
         this.currentDirection = direction;
     }
 
-    resetPosition(){
+    resetPosition(rightLimit){
         let rowSeed = Math.random() * 3;
 
         if(rowSeed < 1) {
@@ -47,11 +47,11 @@ class Enemy {
             this.setTopOffset(110);
         }
 
-        let leftOffset = Math.floor(Math.random() * window.innerWidth);
+        let leftOffset = Math.floor(Math.random() * rightLimit);
         this.setLeftOffset(leftOffset);
 
         let direction = Math.floor(Math.random() * 3) > 1 ? "left" : "right";
         this.setDirection(direction);
-        this.moveToSide();
+        this.moveToSide(rightLimit);
     }
 }
