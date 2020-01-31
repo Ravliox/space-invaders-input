@@ -83,7 +83,7 @@ class Game {
                     enemy.moveToSide();
                 }
             })
-        }, 50);
+        }, 0);
     }
 
     setPromptMessage(msg) {
